@@ -10,10 +10,10 @@ class ProductItem extends HTMLElement {
     const product = document.createElement('li');
     product.setAttribute('class', 'product');
 
-    const imagesource = document.createElement('img');
-    imagesource.setAttribute('src', input.image);
-    imagesource.setAttribute('alt', input.title);
-    imagesource.setAttribute('width', 200);
+    const image = document.createElement('img');
+    image.setAttribute('src', input.image);
+    image.setAttribute('alt', input.title);
+    image.setAttribute('width', 200);
 
     const title = document.createElement('p');
     title.setAttribute('class', 'title');
@@ -21,12 +21,12 @@ class ProductItem extends HTMLElement {
 
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = input.price;
+    price.textContent = 't1' + input.price;
 
     const button = document.createElement('button');
     button.setAttribute('class', 'button');
     
-    if(!(localStorage.getItem(input.id))){
+    if (!(localStorage.getItem(input.id))) {
       button.textContent = 'Add to Cart';
     } else {
       button.textContent = 'Remove from Cart';
@@ -135,7 +135,7 @@ class ProductItem extends HTMLElement {
 
     shadowRoot.appendChild(style);
     shadowRoot.appendChild(product);
-    product.appendChild(imagesource);
+    product.appendChild(image);
     product.appendChild(title);
     product.appendChild(price);
     product.appendChild(button);
