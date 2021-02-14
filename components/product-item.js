@@ -12,7 +12,7 @@ class ProductItem extends HTMLElement {
 
     const img = document.createElement('img');
     img.setAttribute('width', 200);
-    img.setAttribute('src', para.price);
+    img.setAttribute('src', para.image);
     img.setAttribute('alt', para.title);
 
     const title = document.createElement('p');
@@ -25,14 +25,14 @@ class ProductItem extends HTMLElement {
 
     const btn = document.createElement('button');
     btn.setAttribute('class', 'button');
-    
-    if (localStorage.getItem(para.id)) {
+
+    if (localStorage.getItem(para.id) != null) {
       btn.textContent = 'Remove from Cart';
       document.getElementById('cart-count').textContent = localStorage.getItem('counter');
     } else {
       btn.textContent = 'Add to Cart';
     }
-    
+
     btn.onclick = () => {
       var counter = document.getElementById('cart-count');
       if (btn.textContent == 'Removed from Cart') {
@@ -135,4 +135,4 @@ class ProductItem extends HTMLElement {
   }
 }
 
-customElements.define('product-item', ProductItem);
+customElements.define('product-item', ProductItem); 
