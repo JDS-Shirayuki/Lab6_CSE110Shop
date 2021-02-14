@@ -8,16 +8,16 @@ class ProductItem extends HTMLElement {
     const shadowRoot = this.attachShadow({mode: 'open'});
     const product = document.createElement('li');
     product.setAttribute('class', 'product');
+    const image = document.createElement('img');
+    image.setAttribute('src', input.image);
+    image.setAttribute('alt', input.title);
+    image.setAttribute('width', 200);
     const title = document.createElement('p');
     title.setAttribute('class', 'title');
     title.textContent = input.title;
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
     price.textContent = input.price;
-    const image = document.createElement('img');
-    image.setAttribute('src', input.image);
-    image.setAttribute('alt', input.title);
-    image.setAttribute('width', 200);
     const button = document.createElement('button');
     button.setAttribute('class', 'button');
     
@@ -125,9 +125,9 @@ class ProductItem extends HTMLElement {
 
     shadowRoot.appendChild(style);
     shadowRoot.appendChild(product);
+    product.appendChild(image);
     product.appendChild(title);
     product.appendChild(price);
-    product.appendChild(image);
     product.appendChild(button);
   }
 }
