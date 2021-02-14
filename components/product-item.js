@@ -3,30 +3,31 @@
 class ProductItem extends HTMLElement {
 
   // TODO
-  constructor(para){
+  constructor(curr_product){
     super();
+
     const shadowRoot = this.attachShadow({mode: 'open'});
 
     const product = document.createElement('li');
     product.setAttribute('class', 'product');
 
     const imagesource = document.createElement('img');
-    img.setAttribute('src', para.image);
-    img.setAttribute('alt', para.title);
-    img.setAttribute('width', 200);
+    imagesource.setAttribute('src', curr_product.image);
+    imagesource.setAttribute('alt', curr_product.title);
+    imagesource.setAttribute('width', 200);
 
     const title = document.createElement('p');
     title.setAttribute('class', 'title');
-    title.textContent = para.title;
+    title.textContent = curr_product.title;
 
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = '$' + para.price;
+    price.textContent = '$' + curr_product.price;
 
     const button = document.createElement('button');
     button.setAttribute('class', 'button');
     
-    if(!(localStorage.getItem(para.id))){
+    if(!(localStorage.getItem(curr_product.id))){
       button.textContent = 'Add to Cart';
     } else {
       button.textContent = 'Remove from Cart';
@@ -46,7 +47,7 @@ class ProductItem extends HTMLElement {
         cartCount.textContent = curr_count;
 
         button.textContent = 'Remove from Cart';
-        localStorage.setItem(para.id, para.title);
+        localStorage.setItem(curr_product.id, curr_product.title);
         alert('Added to Cart!');
         
       } else {
@@ -114,6 +115,7 @@ class ProductItem extends HTMLElement {
       align-self: center;
       justify-self: center;
       width: 100%;
+      max-height: 100%;
     }
     
     .title {
@@ -134,7 +136,7 @@ class ProductItem extends HTMLElement {
 
     shadowRoot.appendChild(style);
     shadowRoot.appendChild(product);
-    product.appendChild(img);
+    product.appendChild(imagesource);
     product.appendChild(title);
     product.appendChild(price);
     product.appendChild(button);
