@@ -7,8 +7,8 @@ class ProductItem extends HTMLElement {
     super();
     const shadowRoot = this.attachShadow({mode: 'open'});
 
-    const li = document.createElement('li');
-    li.setAttribute('class', 'li');
+    const product = document.createElement('li');
+    product.setAttribute('class', 'product');
     const title = document.createElement('p');
     title.setAttribute('class', 'title');
     title.textContent = input.title;
@@ -31,14 +31,13 @@ class ProductItem extends HTMLElement {
     
     button.onclick = () => {
       var counter = document.getElementById('cart-count');
-      if(button.textContent == 'Remove from Cart'){
-        if(!(localStorage.getItem('cart_count'))){
+      if (button.textContent == 'Remove from Cart') {
+        if (!(localStorage.getItem('cart_count'))) {
           localStorage.setItem('cart_count', 0)
         } 
         var temp = localStorage.getItem('cart_count');
         localStorage.setItem('cart_count', --temp);
         counter.textContent = temp;
-
         button.textContent = 'Add to Cart';
         localStorage.removeItem(input.id);
         alert('Removed from Cart');
@@ -50,7 +49,6 @@ class ProductItem extends HTMLElement {
         var temp = localStorage.getItem('cart_count');
         localStorage.setItem('cart_count', ++temp);
         counter.textContent = temp;
-
         button.textContent = 'Remove from Cart';
         localStorage.setItem(input.id, input.title);
         alert('Added to Cart');
@@ -126,11 +124,11 @@ class ProductItem extends HTMLElement {
     }`;
 
     shadowRoot.appendChild(style);
-    shadowRoot.appendChild(li);
-    li.appendChild(image);
-    li.appendChild(title);
-    li.appendChild(price);
-    li.appendChild(button);
+    shadowRoot.appendChild(product);
+    product.appendChild(image);
+    product.appendChild(title);
+    product.appendChild(price);
+    product.appendChild(button);
   }
 }
 
