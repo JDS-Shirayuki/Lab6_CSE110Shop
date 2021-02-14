@@ -6,7 +6,6 @@ class ProductItem extends HTMLElement {
   constructor(input){
     super();
     const shadowRoot = this.attachShadow({mode: 'open'});
-
     const product = document.createElement('li');
     product.setAttribute('class', 'product');
     const title = document.createElement('p');
@@ -25,7 +24,8 @@ class ProductItem extends HTMLElement {
     if (localStorage.getItem(input.id)) {
       button.textContent = 'Remove from Cart';
       document.getElementById('cart-count').textContent = localStorage.getItem('cart_count');
-    } else {
+    }
+    else {
       button.textContent = 'Add to Cart';
     }
     
@@ -40,7 +40,7 @@ class ProductItem extends HTMLElement {
         counter.textContent = temp;
         button.textContent = 'Add to Cart';
         localStorage.removeItem(input.id);
-        alert('Removed from Cart');
+        alert('Removed from Cart!');
       }
       else {
         if (!(localStorage.getItem('cart_count'))) {
@@ -51,7 +51,7 @@ class ProductItem extends HTMLElement {
         counter.textContent = temp;
         button.textContent = 'Remove from Cart';
         localStorage.setItem(input.id, input.title);
-        alert('Added to Cart');
+        alert('Added to Cart!');
       }
     }
 
@@ -125,9 +125,9 @@ class ProductItem extends HTMLElement {
 
     shadowRoot.appendChild(style);
     shadowRoot.appendChild(product);
-    product.appendChild(image);
     product.appendChild(title);
     product.appendChild(price);
+    product.appendChild(image);
     product.appendChild(button);
   }
 }
