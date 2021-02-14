@@ -11,6 +11,7 @@ class ProductItem extends HTMLElement {
     products.setAttribute('class', 'products');
 
     const img = document.createElement('img');
+    img.setAttribute('width', 150);
     img.setAttribute('src', para.image);
     img.setAttribute('alt', para.title);
 
@@ -25,7 +26,7 @@ class ProductItem extends HTMLElement {
     const btn = document.createElement('button');
     btn.setAttribute('class', 'button');
     
-    if (localStorage.getItem(para.id) != null) {
+    if (localStorage.getItem(para.id)) {
       btn.textContent = 'Remove from Cart';
       document.getElementById('cart-count').textContent = localStorage.getItem('counter');
     } else {
