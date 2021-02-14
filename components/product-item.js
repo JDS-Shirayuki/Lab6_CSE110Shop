@@ -3,31 +3,30 @@
 class ProductItem extends HTMLElement {
 
   // TODO
-  constructor(curr_product){
+  constructor(input){
     super();
-
     const shadowRoot = this.attachShadow({mode: 'open'});
 
     const product = document.createElement('li');
     product.setAttribute('class', 'product');
 
     const imagesource = document.createElement('img');
-    imagesource.setAttribute('src', curr_product.image);
-    imagesource.setAttribute('alt', curr_product.title);
+    imagesource.setAttribute('src', input.image);
+    imagesource.setAttribute('alt', input.title);
     imagesource.setAttribute('width', 200);
 
     const title = document.createElement('p');
     title.setAttribute('class', 'title');
-    title.textContent = curr_product.title;
+    title.textContent = input.title;
 
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = '$' + curr_product.price;
+    price.textContent = '$' + input.price;
 
     const button = document.createElement('button');
     button.setAttribute('class', 'button');
     
-    if(!(localStorage.getItem(curr_product.id))){
+    if(!(localStorage.getItem(input.id))){
       button.textContent = 'Add to Cart';
     } else {
       button.textContent = 'Remove from Cart';
@@ -47,7 +46,7 @@ class ProductItem extends HTMLElement {
         cartCount.textContent = curr_count;
 
         button.textContent = 'Remove from Cart';
-        localStorage.setItem(curr_product.id, curr_product.title);
+        localStorage.setItem(input.id, input.title);
         alert('Added to Cart!');
         
       } else {
@@ -60,7 +59,7 @@ class ProductItem extends HTMLElement {
         cartCount.textContent = curr_count;
 
         button.textContent = 'Add to Cart';
-        localStorage.removeItem(curr_product.id);
+        localStorage.removeItem(input.id);
         alert('Removed from Cart!');
       }
       
