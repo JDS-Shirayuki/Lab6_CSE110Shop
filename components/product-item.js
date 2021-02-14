@@ -11,7 +11,7 @@ class ProductItem extends HTMLElement {
     products.setAttribute('class', 'products');
 
     const img = document.createElement('img');
-    img.setAttribute('width', 150);
+    img.setAttribute('width', 33%);
     img.setAttribute('src', para.image);
     img.setAttribute('alt', para.title);
 
