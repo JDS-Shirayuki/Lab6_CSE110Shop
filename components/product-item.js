@@ -3,60 +3,66 @@
 class ProductItem extends HTMLElement {
 
   // TODO
-  constructor(para){
+  constructor(curr_product){
     super();
     const shadowRoot = this.attachShadow({mode: 'open'});
 
-    const products = document.createElement('li');
-    products.setAttribute('class', 'products');
+    const product = document.createElement('li');
+    product.setAttribute('class', 'product');
 
-    const img = document.createElement('img');
-    img.setAttribute('width', 200);
-    img.setAttribute('src', para.image);
-    img.setAttribute('alt', para.title);
+    const imagesource = document.createElement('img');
+    imagesource.setAttribute('src', curr_product.image);
+    imagesource.setAttribute('alt', curr_product.title);
+    imagesource.setAttribute('width', 200);
 
     const title = document.createElement('p');
     title.setAttribute('class', 'title');
-    title.textContent = para.title;
+    title.textContent = curr_product.title;
 
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = para.price;
+    price.textContent = '$' + curr_product.price;
 
-    const btn = document.createElement('button');
-    btn.setAttribute('class', 'button');
-
-    if (localStorage.getItem(para.id) != null) {
-      btn.textContent = 'Remove from Cart';
-      document.getElementById('cart-count').textContent = localStorage.getItem('counter');
+    const button = document.createElement('button');
+    button.setAttribute('class', 'button');
+    
+    if(!(localStorage.getItem(curr_product.id))){
+      button.textContent = 'Add to Cart';
     } else {
-      btn.textContent = 'Add to Cart';
+      button.textContent = 'Remove from Cart';
+      document.getElementById('cart-count').textContent = localStorage.getItem('cart_count');
     }
+    
+    button.onclick = () => {
+      var cartCount = document.getElementById('cart-count');
 
-    btn.onclick = () => {
-      var counter = document.getElementById('cart-count');
-      if (btn.textContent == 'Removed from Cart') {
-        if (!(localStorage.getItem('counter'))) {
-          localStorage.setItem('counter', 0)
+      if(button.textContent == 'Add to Cart'){
+
+        if(!(localStorage.getItem('cart_count'))){
+          localStorage.setItem('cart_count', 0)
         } 
-        var temp = localStorage.getItem('counter');
-        localStorage.setItem('counter', --temp);
-        counter.textContent = temp;
-        btn.textContent = 'Add to Cart';
-        localStorage.removeItem(para.id);
-        alert('Removed from Cart');
-      }
-      else {
-        if (!(localStorage.getItem('counter'))) {
-          localStorage.setItem('counter', 0)
+        var curr_count = localStorage.getItem('cart_count');
+        localStorage.setItem('cart_count', ++curr_count);
+        cartCount.textContent = curr_count;
+
+        button.textContent = 'Remove from Cart';
+        localStorage.setItem(curr_product.id, curr_product.title);
+        alert('Added to Cart!');
+        
+      } else {
+
+        if(!(localStorage.getItem('cart_count'))){
+          localStorage.setItem('cart_count', 0)
         } 
-        var temp = localStorage.getItem('counter');
-        localStorage.setItem('counter', ++temp);
-        counter.textContent = temp;
-        btn.textContent = 'Remove from Cart';
-        localStorage.setItem(para.id, para.title);
-        alert('Added to Cart');
+        var curr_count = localStorage.getItem('cart_count');
+        localStorage.setItem('cart_count', --curr_count);
+        cartCount.textContent = curr_count;
+
+        button.textContent = 'Add to Cart';
+        localStorage.removeItem(curr_product.id);
+        alert('Removed from Cart!');
       }
+      
     }
 
     let style = document.createElement('style');
@@ -127,12 +133,12 @@ class ProductItem extends HTMLElement {
     }`;
 
     shadowRoot.appendChild(style);
-    shadowRoot.appendChild(products);
-    products.appendChild(img);
-    products.appendChild(title);
-    products.appendChild(price);
-    products.appendChild(btn);
+    shadowRoot.appendChild(product);
+    product.appendChild(imagesource);
+    product.appendChild(title);
+    product.appendChild(price);
+    product.appendChild(button);
   }
 }
 
-customElements.define('product-item', ProductItem); 
+customElements.define('product-item', ProductItem);
