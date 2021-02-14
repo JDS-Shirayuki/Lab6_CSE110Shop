@@ -7,62 +7,54 @@ class ProductItem extends HTMLElement {
     super();
     const shadowRoot = this.attachShadow({mode: 'open'});
 
-    const product = document.createElement('li');
-    product.setAttribute('class', 'product');
-
+    const li = document.createElement('li');
+    li.setAttribute('class', 'li');
+    const title = document.createElement('p');
+    title.setAttribute('class', 'title');
+    title.textContent = input.title;
+    const price = document.createElement('p');
+    price.setAttribute('class', 'price');
+    price.textContent = input.price;
     const image = document.createElement('img');
     image.setAttribute('src', input.image);
     image.setAttribute('alt', input.title);
     image.setAttribute('width', 200);
-
-    const title = document.createElement('p');
-    title.setAttribute('class', 'title');
-    title.textContent = input.title;
-
-    const price = document.createElement('p');
-    price.setAttribute('class', 'price');
-    price.textContent = 't1' + input.price;
-
     const button = document.createElement('button');
     button.setAttribute('class', 'button');
     
-    if (!(localStorage.getItem(input.id))) {
-      button.textContent = 'Add to Cart';
-    } else {
+    if (localStorage.getItem(input.id)) {
       button.textContent = 'Remove from Cart';
       document.getElementById('cart-count').textContent = localStorage.getItem('cart_count');
+    } else {
+      button.textContent = 'Add to Cart';
     }
     
     button.onclick = () => {
-      var cartCount = document.getElementById('cart-count');
-
-      if(button.textContent == 'Add to Cart'){
-
+      var counter = document.getElementById('cart-count');
+      if(button.textContent == 'Remove from Cart'){
         if(!(localStorage.getItem('cart_count'))){
           localStorage.setItem('cart_count', 0)
         } 
-        var curr_count = localStorage.getItem('cart_count');
-        localStorage.setItem('cart_count', ++curr_count);
-        cartCount.textContent = curr_count;
-
-        button.textContent = 'Remove from Cart';
-        localStorage.setItem(input.id, input.title);
-        alert('Added to Cart!');
-        
-      } else {
-
-        if(!(localStorage.getItem('cart_count'))){
-          localStorage.setItem('cart_count', 0)
-        } 
-        var curr_count = localStorage.getItem('cart_count');
-        localStorage.setItem('cart_count', --curr_count);
-        cartCount.textContent = curr_count;
+        var temp = localStorage.getItem('cart_count');
+        localStorage.setItem('cart_count', --temp);
+        counter.textContent = temp;
 
         button.textContent = 'Add to Cart';
         localStorage.removeItem(input.id);
-        alert('Removed from Cart!');
+        alert('Removed from Cart');
       }
-      
+      else {
+        if (!(localStorage.getItem('cart_count'))) {
+          localStorage.setItem('cart_count', 0)
+        } 
+        var temp = localStorage.getItem('cart_count');
+        localStorage.setItem('cart_count', ++temp);
+        counter.textContent = temp;
+
+        button.textContent = 'Remove from Cart';
+        localStorage.setItem(input.id, input.title);
+        alert('Added to Cart');
+      }
     }
 
     let style = document.createElement('style');
@@ -134,11 +126,11 @@ class ProductItem extends HTMLElement {
     }`;
 
     shadowRoot.appendChild(style);
-    shadowRoot.appendChild(product);
-    product.appendChild(image);
-    product.appendChild(title);
-    product.appendChild(price);
-    product.appendChild(button);
+    shadowRoot.appendChild(li);
+    li.appendChild(image);
+    li.appendChild(title);
+    li.appendChild(price);
+    li.appendChild(button);
   }
 }
 
