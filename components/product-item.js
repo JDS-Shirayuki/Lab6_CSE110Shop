@@ -104,6 +104,7 @@ class ProductItem extends HTMLElement {
       align-self: center;
       justify-self: center;
       width: 100%;
+      max-height: 100%;
     }
     
     .title {
