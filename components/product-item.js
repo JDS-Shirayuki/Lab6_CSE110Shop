@@ -20,7 +20,7 @@ class ProductItem extends HTMLElement {
     
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = '!!Test 1!! ' + input.price;
+    price.textContent = '!!Test 2!! ' + input.price;
     li.appendChild(price);
     
     const button = document.createElement('button');
@@ -29,7 +29,7 @@ class ProductItem extends HTMLElement {
     
     if (localStorage.getItem(input.id)) {
       button.textContent = 'Remove from Cart';
-      document.getElementById('cart-count').textContent = localStorage.getItem('x');
+      document.getElementById('cart-count').textContent = localStorage.getItem('temp');
     }
     else {
       button.textContent = 'Add to Cart';
@@ -38,22 +38,22 @@ class ProductItem extends HTMLElement {
     button.onclick = () => {
       var counter = document.getElementById('cart-count');
       if (button.textContent == 'Remove from Cart') {
-        if (!(localStorage.getItem('x'))) {
-          localStorage.setItem('x', 0)
+        if (localStorage.getItem('temp') == null) {
+          localStorage.setItem('temp', 0)
         } 
-        var temp = localStorage.getItem('x');
-        localStorage.setItem('x', --temp);
+        var temp = localStorage.getItem('temp');
+        localStorage.setItem('temp', --temp);
         counter.textContent = temp;
         button.textContent = 'Add to Cart';
         localStorage.removeItem(input.id);
         alert('Removed from Cart!');
       }
       else {
-        if (!(localStorage.getItem('x'))) {
-          localStorage.setItem('x', 0)
+        if (localStorage.getItem('temp') == null) {
+          localStorage.setItem('temp', 0)
         } 
-        var temp = localStorage.getItem('x');
-        localStorage.setItem('x', ++temp);
+        var temp = localStorage.getItem('temp');
+        localStorage.setItem('temp', ++temp);
         counter.textContent = temp;
         button.textContent = 'Remove from Cart';
         localStorage.setItem(input.id, input.title);
