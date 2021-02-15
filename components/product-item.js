@@ -20,7 +20,7 @@ class ProductItem extends HTMLElement {
     
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = '!!Test 5!! ' + input.price;
+    price.textContent = '!!Test 6!! ' + input.price;
     li.appendChild(price);
     
     const button = document.createElement('button');
@@ -40,7 +40,7 @@ class ProductItem extends HTMLElement {
       if (button.textContent == 'Add to Cart') {
         if (localStorage.getItem('temp')) {
           var temp = localStorage.getItem('temp');
-          localStorage.setItem('temp', ++temp);
+          localStorage.setItem('temp', parseInt(temp, 1));
           counter.textContent = temp;
           button.textContent = 'Remove from Cart';
           localStorage.setItem(input.id, input.title);
@@ -49,7 +49,7 @@ class ProductItem extends HTMLElement {
         else {
           localStorage.setItem('temp', 0);
           var temp = localStorage.getItem('temp');
-          localStorage.setItem('temp', ++temp);
+          localStorage.setItem('temp', parseInt(temp, 1));
           counter.textContent = temp;
           button.textContent = 'Remove from Cart';
           localStorage.setItem(input.id, input.title);
@@ -59,7 +59,7 @@ class ProductItem extends HTMLElement {
       else {
         if (localStorage.getItem('temp')) {
           var temp = localStorage.getItem('temp');
-          localStorage.setItem('temp', --temp);
+          localStorage.setItem('temp', parseInt(temp, -1));
           counter.textContent = temp;
           button.textContent = 'Add to Cart';
           localStorage.removeItem(input.id);
@@ -68,7 +68,7 @@ class ProductItem extends HTMLElement {
         else {
           localStorage.setItem('temp', 0);
           var temp = localStorage.getItem('temp');
-          localStorage.setItem('temp', --temp);
+          localStorage.setItem('temp', parseInt(temp, -1));
           counter.textContent = temp;
           button.textContent = 'Add to Cart';
           localStorage.removeItem(input.id);
