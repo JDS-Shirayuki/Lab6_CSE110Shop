@@ -2,12 +2,11 @@
 
 class ProductItem extends HTMLElement {
 
-  // TODO
   constructor(input){
     super();
     const shadowRoot = this.attachShadow({mode: 'open'});
-    const product = document.createElement('li');
-    product.setAttribute('class', 'product');
+    const li = document.createElement('li');
+    li.setAttribute('class', 'product');
     const image = document.createElement('img');
     image.setAttribute('src', input.image);
     image.setAttribute('alt', input.title);
@@ -125,10 +124,10 @@ class ProductItem extends HTMLElement {
 
     shadowRoot.appendChild(style);
     shadowRoot.appendChild(product);
-    product.appendChild(image);
-    product.appendChild(title);
-    product.appendChild(price);
-    product.appendChild(button);
+    li.appendChild(image);
+    li.appendChild(title);
+    li.appendChild(price);
+    li.appendChild(button);
   }
 }
 
