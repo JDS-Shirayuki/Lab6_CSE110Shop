@@ -11,6 +11,7 @@ class ProductItem extends HTMLElement {
     image.setAttribute('src', input.image);
     image.setAttribute('alt', input.title);
     image.setAttribute('width', '200');
+    image.setAttribute('min-height', 500);
     li.appendChild(image);
     
     const title = document.createElement('p');
