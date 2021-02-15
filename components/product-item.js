@@ -20,7 +20,7 @@ class ProductItem extends HTMLElement {
     
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = '!!Test 2!! ' + input.price;
+    price.textContent = '!!Test 3!! ' + input.price;
     li.appendChild(price);
     
     const button = document.createElement('button');
@@ -38,20 +38,34 @@ class ProductItem extends HTMLElement {
     button.onclick = () => {
       var counter = document.getElementById('cart-count');
       if (button.textContent == 'Remove from Cart') {
-        if (localStorage.getItem('temp') == null) {
-          localStorage.setItem('temp', 0)
+        if (localStorage.getItem('temp')) {
+          var temp = localStorage.getItem('temp');
+          localStorage.setItem('temp', --temp);
+          counter.textContent = temp;
+          button.textContent = 'Add to Cart';
+          localStorage.removeItem(input.id);
+          alert('Removed from Cart!');
         } 
-        var temp = localStorage.getItem('temp');
-        localStorage.setItem('temp', --temp);
-        counter.textContent = temp;
-        button.textContent = 'Add to Cart';
-        localStorage.removeItem(input.id);
-        alert('Removed from Cart!');
+        else {
+          localStorage.setItem('temp', 0);
+          var temp = localStorage.getItem('temp');
+          localStorage.setItem('temp', --temp);
+          counter.textContent = temp;
+          button.textContent = 'Add to Cart';
+          localStorage.removeItem(input.id);
+          alert('Removed from Cart!');
+        }
       }
       else {
         if (localStorage.getItem('temp') == null) {
-          localStorage.setItem('temp', 0)
-        } 
+          var temp = localStorage.getItem('temp');
+          localStorage.setItem('temp', ++temp);
+          counter.textContent = temp;
+          button.textContent = 'Remove from Cart';
+          localStorage.setItem(input.id, input.title);
+          alert('Added to Cart!');
+        }
+        localStorage.setItem('temp', 0);
         var temp = localStorage.getItem('temp');
         localStorage.setItem('temp', ++temp);
         counter.textContent = temp;
