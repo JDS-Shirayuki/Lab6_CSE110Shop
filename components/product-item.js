@@ -20,7 +20,7 @@ class ProductItem extends HTMLElement {
     
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = '!!Test 3!! ' + input.price;
+    price.textContent = '!!Test 04!! ' + input.price;
     li.appendChild(price);
     
     const button = document.createElement('button');
@@ -57,7 +57,7 @@ class ProductItem extends HTMLElement {
         }
       }
       else {
-        if (localStorage.getItem('temp') == null) {
+        if (localStorage.getItem('temp')) {
           var temp = localStorage.getItem('temp');
           localStorage.setItem('temp', ++temp);
           counter.textContent = temp;
@@ -65,13 +65,15 @@ class ProductItem extends HTMLElement {
           localStorage.setItem(input.id, input.title);
           alert('Added to Cart!');
         }
-        localStorage.setItem('temp', 0);
-        var temp = localStorage.getItem('temp');
-        localStorage.setItem('temp', ++temp);
-        counter.textContent = temp;
-        button.textContent = 'Remove from Cart';
-        localStorage.setItem(input.id, input.title);
-        alert('Added to Cart!');
+        else {
+          localStorage.setItem('temp', 0);
+          var temp = localStorage.getItem('temp');
+          localStorage.setItem('temp', ++temp);
+          counter.textContent = temp;
+          button.textContent = 'Remove from Cart';
+          localStorage.setItem(input.id, input.title);
+          alert('Added to Cart!');
+        }
       }
     }
 
