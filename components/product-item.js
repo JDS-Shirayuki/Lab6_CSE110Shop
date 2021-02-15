@@ -11,14 +11,21 @@ class ProductItem extends HTMLElement {
     image.setAttribute('src', input.image);
     image.setAttribute('alt', input.title);
     image.setAttribute('width', 200);
+    li.appendChild(image);
+    
     const title = document.createElement('p');
     title.setAttribute('class', 'title');
     title.textContent = input.title;
+    li.appendChild(title);
+    
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = '!!Test 0!! ' + input.price;
+    price.textContent = '!!Test 1!! ' + input.price;
+    li.appendChild(price);
+    
     const button = document.createElement('button');
     button.setAttribute('class', 'button');
+    li.appendChild(button);
     
     if (localStorage.getItem(input.id)) {
       button.textContent = 'Remove from Cart';
@@ -124,10 +131,6 @@ class ProductItem extends HTMLElement {
 
     shadowRoot.appendChild(style);
     shadowRoot.appendChild(li);
-    li.appendChild(image);
-    li.appendChild(title);
-    li.appendChild(price);
-    li.appendChild(button);
   }
 }
 
