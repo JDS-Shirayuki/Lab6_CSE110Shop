@@ -38,16 +38,10 @@ class ProductItem extends HTMLElement {
     button.onclick = () => {
       var counter = document.getElementById('cart-count');
       if (button.textContent == 'Remove from Cart') {
-        if (localStorage.getItem('x')) {
-          var temp = localStorage.getItem('x');
-          localStorage.setItem('x', --(parseInt(temp)));
-          counter.textContent = temp;
-          button.textContent = 'Add to Cart';
-          localStorage.removeItem(input.id);
-          alert('Removed from Cart!');
+        if (localStorage.getItem('x') == null) {
+          localStorage.setItem('x', 0)
         }
         else {
-          localStorage.setItem('x', 0)
           var temp = localStorage.getItem('x');
           localStorage.setItem('x', --(parseInt(temp)));
           counter.textContent = temp;
@@ -57,16 +51,10 @@ class ProductItem extends HTMLElement {
         }
       }
       else {
-        if (localStorage.getItem('x')) {
-          var temp = localStorage.getItem('x');
-          localStorage.setItem('x', ++(parseInt(temp)));
-          counter.textContent = temp;
-          button.textContent = 'Remove from Cart';
-          localStorage.setItem(input.id, input.title);
-          alert('Added to Cart!');
+        if (localStorage.getItem('x') == null) {
+          localStorage.setItem('x', 0)
         }
         else {
-          localStorage.setItem('x', 0)
           var temp = localStorage.getItem('x');
           localStorage.setItem('x', ++(parseInt(temp)));
           counter.textContent = temp;
