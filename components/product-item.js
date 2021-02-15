@@ -14,10 +14,10 @@ class ProductItem extends HTMLElement {
     image.setAttribute('width', 200);
     const title = document.createElement('p');
     title.setAttribute('class', 'title');
-    title.textContent = 'Test 0 ' + input.title;
+    title.textContent = input.title;
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = input.price;
+    price.textContent = '!!Test 0!! ' + input.price;
     const button = document.createElement('button');
     button.setAttribute('class', 'button');
     
