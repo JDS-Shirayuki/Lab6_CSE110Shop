@@ -20,7 +20,7 @@ class ProductItem extends HTMLElement {
     
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = '!!Test 10!! ' + input.price;
+    price.textContent = '$ ' + input.price;
     li.appendChild(price);
     
     const button = document.createElement('button');
