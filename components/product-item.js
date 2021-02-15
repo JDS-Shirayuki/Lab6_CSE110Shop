@@ -2,6 +2,7 @@
 
 class ProductItem extends HTMLElement {
 
+  // TODO
   constructor(input){
     super();
     const shadowRoot = this.attachShadow({mode: 'open'});
@@ -22,7 +23,7 @@ class ProductItem extends HTMLElement {
     
     if (localStorage.getItem(input.id)) {
       button.textContent = 'Remove from Cart';
-      document.getElementById('cart-count').textContent = localStorage.getItem('cart_count');
+      document.getElementById('cart-count').textContent = localStorage.getItem('x');
     }
     else {
       button.textContent = 'Add to Cart';
