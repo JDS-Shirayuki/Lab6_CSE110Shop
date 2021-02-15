@@ -20,7 +20,7 @@ class ProductItem extends HTMLElement {
     
     const price = document.createElement('p');
     price.setAttribute('class', 'price');
-    price.textContent = '!!Test 04!! ' + input.price;
+    price.textContent = '!!Test 5!! ' + input.price;
     li.appendChild(price);
     
     const button = document.createElement('button');
@@ -37,7 +37,26 @@ class ProductItem extends HTMLElement {
     
     button.onclick = () => {
       var counter = document.getElementById('cart-count');
-      if (button.textContent == 'Remove from Cart') {
+      if (button.textContent == 'Add to Cart') {
+        if (localStorage.getItem('temp')) {
+          var temp = localStorage.getItem('temp');
+          localStorage.setItem('temp', ++temp);
+          counter.textContent = temp;
+          button.textContent = 'Remove from Cart';
+          localStorage.setItem(input.id, input.title);
+          alert('Added to Cart!');
+        }
+        else {
+          localStorage.setItem('temp', 0);
+          var temp = localStorage.getItem('temp');
+          localStorage.setItem('temp', ++temp);
+          counter.textContent = temp;
+          button.textContent = 'Remove from Cart';
+          localStorage.setItem(input.id, input.title);
+          alert('Added to Cart!');
+        }
+      }
+      else {
         if (localStorage.getItem('temp')) {
           var temp = localStorage.getItem('temp');
           localStorage.setItem('temp', --temp);
@@ -54,25 +73,6 @@ class ProductItem extends HTMLElement {
           button.textContent = 'Add to Cart';
           localStorage.removeItem(input.id);
           alert('Removed from Cart!');
-        }
-      }
-      else {
-        if (localStorage.getItem('temp')) {
-          var temp = localStorage.getItem('temp');
-          localStorage.setItem('temp', ++temp);
-          counter.textContent = temp;
-          button.textContent = 'Remove from Cart';
-          localStorage.setItem(input.id, input.title);
-          alert('Added to Cart!');
-        }
-        else {
-          localStorage.setItem('temp', 0);
-          var temp = localStorage.getItem('temp');
-          localStorage.setItem('temp', ++temp);
-          counter.textContent = temp;
-          button.textContent = 'Remove from Cart';
-          localStorage.setItem(input.id, input.title);
-          alert('Added to Cart!');
         }
       }
     }
